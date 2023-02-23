@@ -1,0 +1,63 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap');
+*{
+    margin: 0 auto;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Roboto', sans-serif;
+}
+header{
+    background-color: rgb(45,95,145);
+    color: white;
+    padding: 0px;
+    margin-bottom: 25px;
+}
+.header-box{
+    padding: 20px;
+    font-weight: 400;
+    font-size: 15px;
+    text-align: center;
+}
+.content-body{
+    width:85%;
+    margin: 15px auto;
+}
+.left-float{
+    float: left;
+    width: 62%;
+}
+.right-float{
+    float: right;
+    width: 38%;
+}
+.network-card{
+    margin: 18px 9px;
+    border: 1px solid rgb(45,95,145);
+}
+.network-name{
+    padding: 0.1px 5px 2px 28px;
+    background-color: rgb(45,95,145);
+    color: white;
+    text-align: left;
+    font-weight: 400;
+    font-size: 20px;
+}
+.network-name p{
+    margin-top: 15px;
+    margin-bottom: 15px;
+}
+.network-details{
+    background-color: rgb(245, 245, 245);
+    padding: 25px;
+    text-align: justify;
+    font-weight: 400;
+    font-size: 16px;
+    color: rgb(32, 32, 32);
+    line-height: 1.73em;
+    text-justify: distribute-all-lines;
+    word-spacing: 40%;
+}
+.clearfix{
+    clear: both;
+    content: '';
+    margin-bottom: 30px;
+}
