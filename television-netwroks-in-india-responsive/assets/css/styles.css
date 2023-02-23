@@ -1,0 +1,78 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap');
+*{
+    margin: 0 auto;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Roboto', sans-serif;
+}
+header{
+    background-color: #2d5f91;
+    color: #ffffff;
+    padding: 0px;
+    margin-bottom: 25px;
+}
+.header-box{
+    padding: 20px;
+    font-size: 15px;
+    text-align: center;
+}
+.content-body{
+    width:85%;
+    margin: 15px auto;
+}
+.left-float{
+    float: left;
+    width: 61%;
+    margin-right: 1%;
+}
+.right-float{
+    float: right;
+    width: 37%;
+    margin-left: 1%;
+}
+.network-card{
+    margin-top: 19px;
+    border: 1px solid #2d5f91;
+}
+.network-name{
+    padding: 0px 5px 2px 28px;
+    background-color: #2d5f91;
+    color: #ffffff;
+    text-align: left;
+    font-weight: 400;
+    font-size: 20px;
+}
+.network-name p{
+    margin-top: 15px;
+    margin-bottom: 15px;
+}
+.network-details{
+    background-color: #f5f5f5;
+    padding: 25px;
+    text-align: justify;
+    font-weight: 400;
+    font-size: 16px;
+    color: #202020;
+    line-height: 1.72rem;
+}
+.clearfix{
+    clear: both;
+    content: '';
+    margin-bottom: 30px;
+}
+
+@media only screen and (max-width: 1240px){
+
+    *{
+        word-break: break-all;
+    }
+
+    .left-float,.right-float{
+        float: none;
+        width: 100%;
+    }
+    
+    .clearfix{
+        display: none;
+    }
+}
