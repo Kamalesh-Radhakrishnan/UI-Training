@@ -1,0 +1,103 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap');
+
+body{
+    margin: 0;
+    font-family: 'Roboto', sans-serif;
+}
+header{
+    background-color: rgb(61,22,60);
+    color: white;
+    padding: 0px;
+}
+#headerBox{
+    padding: 15px;
+    width: 100%;
+    margin: auto;
+    text-align: center;
+    font-size: 20px;
+}
+.containerBox{
+    width: 90%;
+    margin: auto;
+    margin-top: 50px;
+    /* margin-bottom: 100px; */
+}
+div.containerBox{
+    margin-bottom: 100px;
+}
+.columns{
+    display: inline-block;
+    width: 32%;
+    padding: 9px;
+}
+.columns#column-break{
+    margin-top: 40px;
+}
+.imageTitle{
+    margin-top: 15px;
+    margin-bottom: 0px;
+    font-weight: 300;
+    font-size: 38px;
+}
+img{
+    width: 100%;
+}
+.placeName{
+    color: rgb(20,20,20);
+    font-weight: 600;
+    font-size: 18px;
+    margin-top: 8px;
+}
+.placeDescription{
+    margin-top: 30px;
+    color: rgb(55,55,55);
+    font-weight: 400;
+    font-size: 18px;
+    line-height: 1.4rem;
+}
+button{
+    background-color: rgb(110,30,85);
+    font-size: 17px;
+    font-weight: 100;
+    color: white;
+    padding: 15px 28px;
+    border: none;
+}
+button:hover{
+    cursor: pointer;
+}
+h2{
+    width: 100%;
+    margin: auto;
+    color: rgb(120, 20, 85);
+    font-weight:300;
+    font-size: 58px;
+    text-align: center;
+}
+#emotionPara{
+    text-align: justify; 
+    width: 75%;
+    margin: auto 12.5%;
+    margin-top: 30px;
+    color: rgb(65,65,65);
+    font-weight: 300;
+    line-height: 1.55;
+    font-size: 25px;
+}
+footer{
+    background-color: rgb(108,31,80);
+    color: white;
+}
+footer.containerBox{
+    margin-top: 100px;
+}
+#footerCol{
+    padding-left:6%;
+    padding-top:0px;
+    color: white;
+}
+div#footerCol>p{
+    margin-top: 4px;
+    font-weight: 300;
+    font-size: 13.5px;
+}
