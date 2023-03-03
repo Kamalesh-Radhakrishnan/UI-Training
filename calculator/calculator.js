@@ -1,18 +1,18 @@
 const calculator = {
     add: (a,b) => {
-        console.log(a + b); // return
+        return(a+b);
     },
     sub: (a,b) => {
-        console.log(a-b);
+        return(a-b);
     },
     mul: (a,b) => {
-        console.log(a * b);
+        return(a*b);
     },
     div: (a, b) => {
-        console.log(a / b);
+        return(a/b);
     },
     mod: (a,b) => {
-        console.log(a%b);
+        return(a%b);
     }
 }
 
@@ -27,20 +27,20 @@ console.log("6 ==> Quit");
 let c = 3;
 switch(c){
     case(1):
-        calculator.add(a,b);
-        // break;
+        console.log(calculator.add(a,b));
+        break;
     case(2):
-        calculator.sub(a,b);
-        //break;
+        console.log(calculator.sub(a,b));
+        break;
     case(3):
-        calculator.mul(a,b);
-        // break;
+        console.log(calculator.mul(a,b));
+        break;
     case(4):
-        calculator.div(a,b);
-        //break;
+        console.log(calculator.div(a,b));
+        break;
     case(5):
-        calculator.mod(a,b);
-        //break;
+        console.log(calculator.mod(a,b));
+        break;
     default:
         console.log("Enter proper values... ");
         break;
