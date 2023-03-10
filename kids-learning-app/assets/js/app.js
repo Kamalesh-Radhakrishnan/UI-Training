@@ -152,7 +152,7 @@ const pages = {
         calculate.addEventListener("click",() => {
             var inp = parseInt(inputBox.value);
             if(inp <= 0 || inputBox.value === ''){
-                alert("Enter proper dimension.");
+                alert("Enter proper dimension.\n'0 < dimension < 800'");
             }else{
                 lsobj.dimension = inp;
                 lsobj.page = 3;
