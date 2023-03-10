@@ -15,6 +15,7 @@ const components = {
         let chkicon = document.createElement('i');
         chkicon.classList.add("fa-solid");
         chkicon.classList.add("fa-check");
+        chkicon.classList.add("hide");
         chkicon.classList.add(str);
         chkicon.onclick = (event) => {
             event.preventDefault();
@@ -22,22 +23,10 @@ const components = {
         return chkicon;
     },
 
-    circleButton : () => {
-        let circle = document.createElement('div');
-        circle.setAttribute("class","circle");
-        return circle;
-    },
-
-    triangleButton : () => {
-        let triangle = document.createElement('div');
-        triangle.setAttribute("class","triangle");
-        return triangle;
-    },
-
-    squareButton : () => {
-        let square = document.createElement('div');
-        square.setAttribute("class","square");
-        return square;
+    shape: (str) => {
+        let shapebutton = document.createElement('div');
+        shapebutton.setAttribute("class",str);
+        return shapebutton;
     },
 
     nextButton : () => {
@@ -55,6 +44,64 @@ const components = {
     },
 }
 
+//shapes and their respective properties/behaviours reused in code.
+const shapesDS = {
+    "circle": {
+        class: "circle",
+        titleText: "2. Enter Radius",
+        placeholder: "Enter Radius...",
+        shapeTitle: "Circle",
+        dimensionName: "RADIUS",
+        dimensionFormula: "r",
+        perimeterFormula: "2 * 𝝅 * r",
+        areaFormula: "𝝅 * r * r",
+        perimeter: (dimension) => {
+            perimeter=(2 * Math.PI * dimension).toFixed(2);
+            return perimeter;
+        },
+        area: (dimension) => {
+            area = (Math.PI * dimension * dimension).toFixed(2);
+            return area;
+        },
+    },
+    "triangle" : {
+        class: "triangle",
+        titleText: "2. Enter Side (Base & Height)",
+        placeholder: "Enter base height...",
+        shapeTitle: "Equilateral Triangle",
+        dimensionName : "SIDE",
+        dimensionFormula : "s",
+        perimeterFormula : "3 * s",
+        areaFormula : "0.433 * s * s",
+        perimeter: (dimension) => {
+            perimeter=(3 * dimension).toFixed(2);
+            return perimeter;
+        },
+        area: (dimension) => {
+            area = (0.433 * dimension * dimension).toFixed(2);
+            return area;
+        },
+    },
+    "square" : {
+        class: "square",
+        titleText: "2. Enter Side",
+        placeholder: "Enter side...",
+        shapeTitle: "Square",
+        dimensionName: "SIDE",
+        dimensionFormula: "a",
+        perimeterFormula: "4 * a",
+        areaFormula: "a * a",
+        perimeter: (dimension) => {
+            perimeter = (4 * dimension).toFixed(2);
+            return perimeter;
+        },
+        area: (dimension) => {
+            area = (dimension * dimension).toFixed(2);
+            return area;
+        }
+    }
+}
+
 // local Storage object
 const lsShape = {
     dimensionName:"",
@@ -70,7 +117,6 @@ const lsShape = {
     shape: "",
     isSelected : false,
 }
-
 
 // Each page is written as a function to render
 const pages = {
@@ -91,34 +137,31 @@ const pages = {
             localStorage.setItem("lsShape",JSON.stringify(lsobj));
             return loadBodyPage(); 
         });
-        let circle = components.circleButton();
-        circle.append(components.checkIcon("chkcircle"));
-        
-        let triangle = components.triangleButton();
-        triangle.append(components.checkIcon("chktriangle"));
-        
-        let square = components.squareButton();
-        square.append(components.checkIcon("chksquare"));
 
-        shapes.append(circle,triangle,square);
+        for (const key in shapesDS) {
+            let shape = components.shape(key);
+            let icon = components.checkIcon("chk" + key)
+            shape.append(icon);
+            shapes.append(shape);
+        }
         body.append(title,shapes);
 
-        document.querySelectorAll(".fa-check").forEach(el => el.style.display = "none");
-        
         if(lsobj.isSelected != false){
             body.append(nextButton);
         }
 
         shapes.addEventListener("click", (event) => {
-            document.querySelectorAll(".fa-check").forEach(el => el.style.display = "none");
+            if(lsobj.shape != ''){
+                const uncheck = document.querySelector("." + lsobj.shape + " i");
+                uncheck.classList.add("hide");
+            }
             if(event.target.className.indexOf("chk") >= 0){
                 lsobj.shape = event.target.className.split(" ")[2].slice(3);
-                console.log(lsobj.shape);
             }else{
                 lsobj.shape = event.target.className;
-                console.log(lsobj.shape);
             }
-            document.querySelector(".chk" + lsobj.shape).style.display = "inline";
+            const check = document.querySelector("." + lsobj.shape + " i");
+            check.classList.remove("hide");
             lsobj.isSelected = true;
             localStorage.setItem("lsShape",JSON.stringify(lsobj));
             body.append(nextButton);
@@ -134,25 +177,15 @@ const pages = {
         var calculate = components.nextButton();
         calculate.innerText = "CALCULATE";
 
-        switch(lsobj.shape){
-            case('circle'):
-                title.innerText = "2. Enter Radius";
-                inputBox.setAttribute("placeholder","Enter Radius...");
-                break;
-            case('triangle'):
-                title.innerText = "2. Enter Side (Base & Height)";
-                inputBox.setAttribute("placeholder","Enter base height...");
-                break;
-            case('square'):
-                title.innerText = "2. Enter Side";
-                inputBox.setAttribute("placeholder","Enter side...");
-                break;
-        }
-        
+
+        ///TtileText & placeholder
+        title.innerText = shapesDS[lsobj.shape].titleText;
+        inputBox.setAttribute("placeholder",shapesDS[lsobj.shape].placeholder);
         calculate.addEventListener("click",() => {
             var inp = parseInt(inputBox.value);
-            if(inp <= 0 || inputBox.value === ''){
-                alert("Enter proper dimension.\n'0 < dimension < 800'");
+            if(inp <= 0 || inputBox.value === '' || inp >= 800){
+                inputBox.value='';
+                alert("Enter proper dimension.\n0 < dimension < 800");
             }else{
                 lsobj.dimension = inp;
                 lsobj.page = 3;
@@ -172,20 +205,8 @@ const pages = {
         var titleText = components.titleDiv();
         var shape="";
 
-        switch(lsobj.shape){
-            case('circle'):
-                shape = components.circleButton();
-                titleText.innerText = "Circle";
-                break;
-            case('triangle'):
-                shape = components.triangleButton();
-                titleText.innerText = "Equilateral Triangle";
-                break;
-            case('square'):
-                shape = components.squareButton();
-                titleText.innerText = "Square";
-                break;
-        };
+        shape = components.shape(lsobj.shape);
+        titleText.innerText = shapesDS[lsobj.shape].shapeTitle;
 
         body.append(shape,titleText);
         var table = document.createElement('div');
@@ -212,28 +233,12 @@ const pages = {
 function calculateFunc(){
     var lsobj = JSON.parse(localStorage.getItem("lsShape"));
     var dimension = parseInt(lsobj.dimension);
-    if(lsobj.shape == 'circle'){
-        lsobj.perimeter = (2 * Math.PI * dimension).toFixed(2) + " cm";
-        lsobj.area = (Math.PI * dimension * dimension).toFixed(2) + " sq cm";
-        lsobj.dimensionName = "RADIUS";
-        lsobj.dimensionFormula = "r";
-        lsobj.perimeterFormula = "2 * 𝝅 * r";
-        lsobj.areaFormula = "𝝅 * r * r";
-    }else if(lsobj.shape == 'triangle'){
-        lsobj.perimeter = (3 * dimension).toFixed(2) + " cm";
-        lsobj.area = (0.433 * dimension * dimension).toFixed(2) + " sq cm";
-        lsobj.dimensionName = "SIDE";
-        lsobj.dimensionFormula = "s";
-        lsobj.perimeterFormula = "3 * s";
-        lsobj.areaFormula = "0.433 * s * s";
-    }else if(lsobj.shape == 'square'){
-        lsobj.perimeter = (4 * dimension).toFixed(2) + " cm";
-        lsobj.area = (dimension * dimension).toFixed(2) + " sq cm";
-        lsobj.dimensionName = "SIDE";
-        lsobj.dimensionFormula = "a";
-        lsobj.perimeterFormula = "4 * a";
-        lsobj.areaFormula = "a * a";
-    }
+    lsobj.perimeter = shapesDS[lsobj.shape].perimeter(dimension) + " cm";
+    lsobj.area = shapesDS[lsobj.shape].area(dimension) + " sq cm";
+    lsobj.dimensionName = shapesDS[lsobj.shape].dimensionName;
+    lsobj.dimensionFormula = shapesDS[lsobj.shape].dimensionFormula;
+    lsobj.perimeterFormula = shapesDS[lsobj.shape].perimeterFormula;
+    lsobj.areaFormula = shapesDS[lsobj.shape].areaFormula;
     localStorage.setItem("lsShape",JSON.stringify(lsobj));
 }
 
