@@ -142,37 +142,26 @@ input::placeholder{
 .col1,.col2,.col3{
     display: inline-block;
     height: 50px;
+    margin: 0;
+    padding-top: 15px;
+    padding-left: 10px;
+    color: #ffffff;
+    text-align: left;
+    font-size: 15px;
 }
 
 .col1{
     width: 200px;
-    margin: 0;
-    padding-top: 15px;
-    padding-left: 10px;
     background-color: #2b60ce;
-    color: #ffffff;
-    text-align: left;
-    font-size: 15px;
+    
 }
 
 .col2{
     width:150px;
-    margin: 0;
-    padding-top: 15px;
-    padding-left: 10px;
     background-color: #4a5d7c;
-    color: #ffffff;
-    text-align: left;
-    font-size: 15px;
 }
 
 .col3{
     width:150px;
-    margin: 0;
-    padding-top: 15px;
-    padding-left: 10px;
-    background-color: rgb(75,134,247);
-    color: #ffffff;
-    text-align: left;
-    font-size: 15px;
+    background-color: #4B86F7;
 }
